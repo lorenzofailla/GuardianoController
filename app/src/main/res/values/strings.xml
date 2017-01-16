@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GuardianoController</string>
+
+    <!-- MainActivity_Menu -->
+    <string name="MainActivity_Menu_signOut">Sign out</string>
+
+    <!-- SignInActivity -->
+    <string name="SignInActivity_signIn">Sign in</string>
+
+    <!-- PermissionsRequestActivity -->
+    <string name="PermissionsRequestActivity_permissionInternet">Internet access</string>
+    <string name="PermissionsRequestActivity_permissionWriteExternalStorage">Write external storage</string>
+
+    <string name="PermissionsRequestActivity_permissionGranted">GRANTED</string>
+    <string name="PermissionsRequestActivity_permissionDenied">DENIED</string>
+</resources>
