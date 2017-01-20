@@ -2,220 +2,283 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\10.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="c2376d0ec8dbe85d3446cad64905c0395fbe220e">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-auth-base-10.0.0_5c28cb000394bca879db17af3652a167e8bc26d0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.1.0_6675c90d296823d92d6e8acf7a7c623e54620244.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\10.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="2b410ae1fda134f470276365f4b7f846269e0d23">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-common-10.0.0_e3a38873181bee7642ac1fa799e83b812df46225.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="75dbc3537bc912d077b3db2f5ac72d5b43644b2c">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-10.0.0_38b82235aefe4ffefed44c9e9b78980fabeff83e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.1.0_e469b80a6b557e2896c2b25df9e3e41060bb0d74.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.1.0_e2f67a009deebd29f9d4ef5c69c3242ab6cb3f1b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="985be85104f6d0c5c5e51e7b7e60d8883a98ac64">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-10.0.0_cc71647fc558b8f7871632240b44a553d5f66b39.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.0_d8046d83b459c1877e63f4abc3c66b2a7266da9f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.0_ba91eef11628c5eed55b9ba1cd48afe57de91d4a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-config\10.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="ca730ac2d72056445bf68998cec6b6b2cf4d179e">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-config-10.0.0_3287e5f4614654a4a7a6a318820c265a1c68d04f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.0_ba2a019b84857cc1df517fb036c60a91202683c2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.1.0_7b5cb0f3a3d7b66811cc6cfffb5745625c1b468e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="8749265264e1f922dc77ea67da4e71ab396a19d9">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\instant-run_b5d8c7d56388e9a5dcda804b31641844d6e36323.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="bfce88c4b95d2582286c1c20e45ea7fe05717840">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_080f911d483b69e6475a8b4d962c863f71bda2fa.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.1.0_d355d34cbec4efa42d55753d4126c217386e3360.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\10.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="a383a583c346ce8ea5767d77f4fe58e1d8e5f221">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-auth-10.0.0_0e52d90d39fb0ba14fceee3a9265e005e8934c86.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\10.0.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\10.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
         sha1="c7ed3fd9d5a9687980dac6c504abd91ad3dfa238">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-impl-10.0.0_82b248ece2549d11c301d86547a6f14dbe35ca14.jar" />
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-impl-10.0.0_3689bc058e7fb103257ba71a196166570e7d88fc\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-messaging\10.0.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="444a220fadbdf260b3aa47c6e858c5d1e645170f">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-messaging-10.0.0_dc665f8e0754b3fbdbeb776a77ca79c0d4675500.jar" />
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.0_8565eb381909c58b990bbb43bb0a1eaac4b9d50d\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\10.0.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="8bb364f67ec2eba2356872b2b4ddfe8aada2d5ac">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-auth-10.0.0_825ec2d7147aa1827f7eec5b93084abc78c6f6f1.jar" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.0_c31cfbc127c488ee7df4a722a86ac9fb878adf33\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database-connection\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3a05b3852a6aec21ea0a6ea4d284ee69c04c55c4">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-connection-10.0.0_bd534db9cb0ecf7d2f4d04619a87f67dbc280ace\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
         sha1="3347c3e7056fabc88bdbd8fdae65ddf2b674d977">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-10.0.0_fcfa9399589d16cdb35a731339fa9795db73b571.jar" />
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-10.0.0_a55b7cf014716bacba0c06d6dd64e7b4a549bd84\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\10.0.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\10.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="a61005619e43f203768ff3f224137def6f029e50">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-iid-10.0.0_1761c84cb81aab160323c6dfb6dd837ba2142dc8.jar" />
+        sha1="a383a583c346ce8ea5767d77f4fe58e1d8e5f221">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-10.0.0_ac788349f7e8a241c6291be71967171687e6be0f\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.0_b6d188fd13d59818419f95f226a01a05416e9d31.jar" />
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.0_854d9bc5fb7fd32aacdff980df61a2a9a349cdfd\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c2376d0ec8dbe85d3446cad64905c0395fbe220e">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-base-10.0.0_52dcb1dba68badcb31aec3bb5ceaa90e4c8ca293\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.0_af06326c5387080f1dab2b26dbb3659f1eb1ce2a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="5e497d60f0cb6ce87c458ac5420a46d0fed49bd0">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.0_c7df62e736f106499a137e23657b5e227f396f18\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\design\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="26384be22ddc74cfe197ebda9edbc7d1fd8bd537">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.0.0_c17356e4be7ae16234ab1fa1e64f66d15c7d20cf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-appindexing\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="22031b047b12904b888549ba36c0c30d83b1aea1">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-appindexing-10.0.0_6658a98a6d65faadd68b863ebbdfd001104a1bb7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.0_dbdb02897d9f70e60f164fe89fbb17f0c0537db5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.0.0_8edb43650ba600cbf21873d7db31f8e22316257e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-config\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="ca730ac2d72056445bf68998cec6b6b2cf4d179e">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-config-10.0.0_fe4c858fd588c360c1758ec229fe27c070c6d65a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="abe3a45e992f9ccc6ab23f5b12a34600ae0cf8e7">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_afa959ba040645713b351f9b05d84b746679c19e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
         sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.0_49aef243fa01991ed6aa4af15de26e19b91e82a8.jar" />
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.0_4754683aad95359cd89b6ed756ebe3bbe7aae1c9\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\10.0.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8ebbc8e010818dbfd053192a0926f133ff46b203">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_7e1b63a45e601b44757978caed48e2ca9ecb5a01\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-messaging\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="444a220fadbdf260b3aa47c6e858c5d1e645170f">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-messaging-10.0.0_0ccef5e707f292dae2f8c8cfb841fc061c96ed45\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.firebaseui\firebase-ui-database\0.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c76f6507a42aec274953e882bf3c49a570843ef5">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.firebaseui-firebase-ui-database-0.4.0_817f0fa2c7ff0f96e9438a42ae0a094c38148a9e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="a61005619e43f203768ff3f224137def6f029e50">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-iid-10.0.0_35e0fa134697d27c42a14af19a7d91a40dbf81b9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.0_849a88aa1848500579f79935b9c10977f606b677\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\10.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
         sha1="ce6e6e59212db0893fc36e5b579cf319a84aade8">
-        <dex dex="C:\Users\lore_f\AndroidStudioProjects\GuardianoController\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-10.0.0_73d5930635be84f4548eac627ef9514f7ae3d7ab.jar" />
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-10.0.0_f4c9886c74fde4da15cdea8ef4c1e4d403288815\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="2b410ae1fda134f470276365f4b7f846269e0d23">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-10.0.0_9547ef1339c79f14019af84907aa189f3334e3cf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="75dbc3537bc912d077b3db2f5ac72d5b43644b2c">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-10.0.0_9158a1122a1759d29ed966fd55968d4fe5e46970\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.0_5113b6523b7c4c0dc0bcd05e0376453f121e9ec4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="41e39c7ee84e63ae18df6c6ccb96d196996add4c">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-10.0.0_13cdee1fea59a5ba371a4807de15cd5f2e3cdf95\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8bb364f67ec2eba2356872b2b4ddfe8aada2d5ac">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-10.0.0_7e7bad8453f8480eebab436da7486ddeb3e501ac\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="985be85104f6d0c5c5e51e7b7e60d8883a98ac64">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-10.0.0_1e2e5e2443a90b4627413209b54845ad3dacb27a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.0_3cf141d5ad58af18c7ba582fc6a18f4575ae5852\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\105053228\AndroidStudioProjects\GuardianoController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.0_62df2b8af623df2d2a463064340af6b641d0fd8d\classes.dex" />
     </item>
 
 </items>

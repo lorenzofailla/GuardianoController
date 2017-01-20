@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.apps.lore_f.guardianocontroller.MainActivity">
+    android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/TXV___MAINACTIVITY___ONLINEDEVICESLBL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/MainActivity_onlineDevices"></TextView>
 
-    <Button
-        android:text="Request instant picture"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RVW___MAINACTIVITY___ONLINEDEVICES"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/BTN_REMOTECONTROL_REQUEST_INSTANT_PICTURE" />
-</RelativeLayout>
+        android:id="@+id/PBR___MAINACTIVITY___PROGRESSBAR"></ProgressBar>
+
+
+    </LinearLayout>

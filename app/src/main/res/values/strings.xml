@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">GuardianoController</string>
 
+    <!-- MainActivity -->
+    <string name="MainActivity_onlineDevices">Online devices:</string>
+
     <!-- MainActivity_Menu -->
     <string name="MainActivity_Menu_signOut">Sign out</string>
 
@@ -13,4 +16,6 @@
 
     <string name="PermissionsRequestActivity_permissionGranted">GRANTED</string>
     <string name="PermissionsRequestActivity_permissionDenied">DENIED</string>
+
+
 </resources>

@@ -1,26 +1,69 @@
 package com.apps.lore_f.guardianocontroller;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.appindexing.FirebaseAppIndex;
+import com.google.firebase.appindexing.FirebaseUserActions;
+import com.google.firebase.appindexing.Indexable;
+import com.google.firebase.appindexing.builders.Indexables;
+import com.google.firebase.appindexing.builders.PersonBuilder;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
 
-    private String recipientTokenID="f7kmpKl5LJg:APA91bEZ2_tXG_EsLaAVxN-PO1Vk7-1ga-FhHi_sidZLiJS5hwJrurxA7nb3P3mHHhRDqG48wzKCxelKgPqjgch0KwMFDd63m9Cqbu0YIyQ4763Emqm933We4H5AhNgDWNxFwOCuorL8";
-    private String authTokenID
+    private RecyclerView onlineDevicesRecyclerView;
+    private DatabaseReference firebaseDatabaseReference;
+    private FirebaseRecyclerAdapter<OnlineDeviceMessage, OnlineDevicesHolder> firebaseAdapter;
+    private ProgressBar progressBar;
+    private LinearLayoutManager linearLayoutManager;
+    private GoogleApiClient googleApiClient;
+
+    private static final String ONLINE_DEVICES_CHILD="online_devices";
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    public static class OnlineDevicesHolder extends RecyclerView.ViewHolder {
+        public TextView txvDeviceID;
+
+        public OnlineDevicesHolder(View v) {
+            super(v);
+            txvDeviceID = (TextView) itemView.findViewById(R.id.TXV___ONLINEDEVICE___DEVICE_ID);
+
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,42 +101,83 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        FirebaseInstanceId firebaseInstanceId = FirebaseInstanceId.getInstance();
-        String thisDeviceToken = firebaseInstanceId.getToken();
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .build();
 
-        try {
-            authTokenID = firebaseInstanceId.getToken(thisDeviceToken, "FCM");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        progressBar = (ProgressBar) findViewById(R.id.PBR___MAINACTIVITY___PROGRESSBAR);
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
 
+        onlineDevicesRecyclerView = (RecyclerView) findViewById(R.id.RVW___MAINACTIVITY___ONLINEDEVICES);
 
-        Button btnRequestInstantPicture = (Button) findViewById(R.id.BTN_REMOTECONTROL_REQUEST_INSTANT_PICTURE);
-        btnRequestInstantPicture.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        firebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        firebaseAdapter = new FirebaseRecyclerAdapter<OnlineDeviceMessage, OnlineDevicesHolder>(
+                OnlineDeviceMessage.class,
+                R.layout.online_device,
+                OnlineDevicesHolder.class,
+                firebaseDatabaseReference.child(firebaseUser.getUid())) {
 
-                        requestPicture();
-
-                    }
-
+            @Override
+            protected OnlineDeviceMessage parseSnapshot(DataSnapshot snapshot) {
+                OnlineDeviceMessage onlineDeviceMessage = super.parseSnapshot(snapshot);
+                if (onlineDeviceMessage != null) {
+                    onlineDeviceMessage.setId(snapshot.getKey());
                 }
-        );
+                return onlineDeviceMessage;
+            }
+
+            @Override
+            protected void populateViewHolder(OnlineDevicesHolder viewHolder, OnlineDeviceMessage onlineDeviceMessage, int position) {
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
+                viewHolder.txvDeviceID.setText(onlineDeviceMessage.getDeviceDescription());
+
+            }
+
+        };
+
+        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int onlineDevicesCount = firebaseAdapter.getItemCount();
+                int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
+                // to the bottom of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (onlineDevicesCount - 1) && lastVisiblePosition == (positionStart - 1))) {
+                    onlineDevicesRecyclerView.scrollToPosition(positionStart);
+                }
+            }
+        });
 
     }
 
-    private void requestPicture(){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
-        // ottiene un'istanza di FirebaseMessaging
-        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        RemoteMessage remoteMessage = new RemoteMessage.Builder(recipientTokenID)
-                .addData("body", "COMMAND_FROM_CLIENT:::TAKE_PICTURE")
-                .setTtl(120)
-                .build();
+        switch (item.getItemId()) {
 
-        firebaseMessaging.send(remoteMessage);
+            case R.id.sign_out_menu:
+                firebaseAuth.signOut();
+                Auth.GoogleSignInApi.signOut(googleApiClient);
+                firebaseUser = null;
+
+                startActivity(new Intent(this, SignInActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
 
     }
 
