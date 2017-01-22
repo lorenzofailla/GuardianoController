@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -54,16 +55,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public static class OnlineDevicesHolder extends RecyclerView.ViewHolder {
+
         public TextView txvDeviceID;
+        public ImageButton btnGoToDeviceControl;
 
         public OnlineDevicesHolder(View v) {
             super(v);
             txvDeviceID = (TextView) itemView.findViewById(R.id.TXV___ONLINEDEVICE___DEVICE_ID);
+            btnGoToDeviceControl = (ImageButton) itemView.findViewById(R.id.BTN___ONLINEDEVICE___DEVICE_IMG);
 
         }
 
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         firebaseUser = firebaseAuth.getCurrentUser();
 
         if(firebaseUser==null){
+
             // autenticazione non effettuata
 
             // lancia la SignInActivity e termina l'attività corrente
@@ -117,21 +121,25 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 OnlineDeviceMessage.class,
                 R.layout.online_device,
                 OnlineDevicesHolder.class,
-                firebaseDatabaseReference.child(firebaseUser.getUid())) {
+                firebaseDatabaseReference.child(firebaseUser.getUid()).child(ONLINE_DEVICES_CHILD)) {
 
-            @Override
-            protected OnlineDeviceMessage parseSnapshot(DataSnapshot snapshot) {
-                OnlineDeviceMessage onlineDeviceMessage = super.parseSnapshot(snapshot);
-                if (onlineDeviceMessage != null) {
-                    onlineDeviceMessage.setId(snapshot.getKey());
-                }
-                return onlineDeviceMessage;
-            }
 
             @Override
             protected void populateViewHolder(OnlineDevicesHolder viewHolder, OnlineDeviceMessage onlineDeviceMessage, int position) {
+
                 progressBar.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.txvDeviceID.setText(onlineDeviceMessage.getDeviceDescription());
+                viewHolder.btnGoToDeviceControl.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getApplicationContext(), DeviceControlActivity.class);
+                        intent.putExtra("_device-name", onlineDeviceMessage.getDeviceDescription());
+                        intent.putExtra("_device-token", onlineDeviceMessage.getDeviceToken());
+
+                    }
+
+                });
 
             }
 
@@ -150,7 +158,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     onlineDevicesRecyclerView.scrollToPosition(positionStart);
                 }
             }
+
         });
+
+        onlineDevicesRecyclerView.setLayoutManager(linearLayoutManager);
+        onlineDevicesRecyclerView.setAdapter(firebaseAdapter);
 
     }
 

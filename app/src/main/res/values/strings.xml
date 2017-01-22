@@ -17,5 +17,6 @@
     <string name="PermissionsRequestActivity_permissionGranted">GRANTED</string>
     <string name="PermissionsRequestActivity_permissionDenied">DENIED</string>
 
-
+    <!-- DeviceControlActivity -->
+    <string name="DeviceControlActivity_requestShotLabel">Request instant shot</string>
 </resources>

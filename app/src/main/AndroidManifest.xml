@@ -17,10 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".SignInActivity" />
-        <activity android:name=".PermissionsRequestActivity"></activity>
-
+        <activity android:name=".PermissionsRequestActivity" />
+        <activity android:name=".DeviceControlActivity"></activity>
     </application>
 
 </manifest>

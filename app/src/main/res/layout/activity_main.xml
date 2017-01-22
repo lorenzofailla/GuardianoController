@@ -21,5 +21,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/PBR___MAINACTIVITY___PROGRESSBAR"></ProgressBar>
 
-
     </LinearLayout>
