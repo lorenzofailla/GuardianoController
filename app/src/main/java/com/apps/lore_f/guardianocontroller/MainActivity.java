@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.auth.api.Auth;
@@ -125,22 +127,28 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
             @Override
-            protected void populateViewHolder(OnlineDevicesHolder viewHolder, OnlineDeviceMessage onlineDeviceMessage, int position) {
+            protected void populateViewHolder(OnlineDevicesHolder viewHolder, final OnlineDeviceMessage onlineDeviceMessage, int position) {
 
                 progressBar.setVisibility(ProgressBar.INVISIBLE);
+
                 viewHolder.txvDeviceID.setText(onlineDeviceMessage.getDeviceDescription());
                 viewHolder.btnGoToDeviceControl.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View view) {
 
                         Intent intent = new Intent(getApplicationContext(), DeviceControlActivity.class);
                         intent.putExtra("_device-name", onlineDeviceMessage.getDeviceDescription());
                         intent.putExtra("_device-token", onlineDeviceMessage.getDeviceToken());
 
+                        startActivity(intent);
+                        finish();
+                        return;
+
                     }
 
                 });
 
+                                
             }
 
         };
@@ -157,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         (positionStart >= (onlineDevicesCount - 1) && lastVisiblePosition == (positionStart - 1))) {
                     onlineDevicesRecyclerView.scrollToPosition(positionStart);
                 }
+
             }
 
         });
