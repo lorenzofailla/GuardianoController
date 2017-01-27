@@ -5,12 +5,21 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
@@ -37,6 +46,29 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
 
     private String messagingToken;
+
+    private ProgressBar progressBar;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView takenPicturesRecyclerView;
+    private DatabaseReference firebaseDatabaseReference;
+    private FirebaseUser firebaseUser;
+
+    private FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder> firebaseAdapter;
+    private static final String TAKEN_PICTURES_CHILD = "taken_pictures";
+
+    public static class TakenPicturesHolder extends RecyclerView.ViewHolder {
+
+        public TextView txvPictureDate;
+        public ImageButton btnGoToPicture;
+
+        public TakenPicturesHolder(View v) {
+            super(v);
+            txvPictureDate = (TextView) itemView.findViewById(R.id.TXV___TAKENPICTURES___PICTUREDATE);
+            btnGoToPicture = (ImageButton) itemView.findViewById(R.id.BTN___TAKENPICTURES___PICTURETHUMBNAIL);
+
+        }
+
+    }
 
     /*
     private class GetMessagingToken extends AsyncTask<String, Void, String> {
@@ -72,7 +104,6 @@ public class DeviceControlActivity extends AppCompatActivity {
     }
     */
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +134,65 @@ public class DeviceControlActivity extends AppCompatActivity {
 
         });
 
-        messagingToken="AIzaSyAM-GVRMIkYoUuEiU-8PvVjw-zaws8h1xw";
+        messagingToken="AAAAmNxP3tQ:APA91bG5JWyRvnB4Qeri3SaCkormjgzGBbvkSsI_qYv3OuN0U1_IjjJs8miR_5XPUZZUW2-9tg_CLkrWFOo9btjhzLiQG5ApK5kqcHoxqBibi_-WD5f0eNhDtFCr1Wi_o6YQ4c2S_oBGPpr35e-rio_mbyDMntOtGw";
         //new GetMessagingToken().execute(FirebaseInstanceId.getInstance().getId());
+
+        progressBar = (ProgressBar) findViewById(R.id.PBR___MAINACTIVITY___PROGRESSBAR);
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+
+        firebaseDatabaseReference= FirebaseDatabase.getInstance().getReference();
+
+        takenPicturesRecyclerView = (RecyclerView) findViewById(R.id.RVW___MAINACTIVITY___ONLINEDEVICES);
+
+        firebaseAdapter = new FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder>(
+                PictureTakenMessage.class,
+                R.layout.taken_picture,
+                TakenPicturesHolder.class,
+                firebaseDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(TAKEN_PICTURES_CHILD)) {
+
+
+            @Override
+            protected void populateViewHolder(TakenPicturesHolder viewHolder, final PictureTakenMessage pictureTakenMessage, int position) {
+
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
+
+                viewHolder.txvPictureDate.setText(pictureTakenMessage.getDateStamp());
+                viewHolder.btnGoToPicture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        return;
+
+                    }
+
+                });
+
+
+            }
+
+        };
+
+        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int onlineDevicesCount = firebaseAdapter.getItemCount();
+                int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
+                // to the bottom of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (onlineDevicesCount - 1) && lastVisiblePosition == (positionStart - 1))) {
+                    takenPicturesRecyclerView.scrollToPosition(positionStart);
+                }
+
+            }
+
+        });
+
+        takenPicturesRecyclerView.setLayoutManager(linearLayoutManager);
+        takenPicturesRecyclerView.setAdapter(firebaseAdapter);
+
         updateUI();
 
     }
@@ -129,11 +217,9 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     private void requestShot(){
 
-        sendMessage(deviceToken+"@gcm.googleapis.com", "il mio messaggio");
+        sendMessage(deviceToken, "COMMAND_FROM_CLIENT:::TAKE_PICTURE");
 
     }
-
-
 
     public void sendMessage(final String recipient, final String message) {
 
@@ -141,12 +227,16 @@ public class DeviceControlActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
                 try {
+
                     JSONObject root = new JSONObject();
                     JSONObject notification = new JSONObject();
                     notification.put("body", message);
 
                     JSONObject data = new JSONObject();
+
+                    root.put("notification", notification);
                     data.put("message", message);
+
                     root.put("data", data);
                     root.put("to", recipient);
 

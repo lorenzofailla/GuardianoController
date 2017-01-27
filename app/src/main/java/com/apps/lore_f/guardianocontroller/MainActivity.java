@@ -141,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         intent.putExtra("_device-token", onlineDeviceMessage.getDeviceToken());
 
                         startActivity(intent);
-                        finish();
                         return;
 
                     }
