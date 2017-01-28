@@ -43,7 +43,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private String deviceToken;
     OkHttpClient okHttpClient = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
+    public static final String FCM_MESSAGE_URL = "http://lorenzofailla.esy.es/Guardiano/Messaging/";
 
     private String messagingToken;
 
@@ -54,7 +54,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
 
     private FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder> firebaseAdapter;
-    private static final String TAKEN_PICTURES_CHILD = "taken_pictures";
+    private static final String TAKEN_PICTURES_CHILD = "pictures_taken";
 
     public static class TakenPicturesHolder extends RecyclerView.ViewHolder {
 
@@ -70,40 +70,6 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     }
 
-    /*
-    private class GetMessagingToken extends AsyncTask<String, Void, String> {
-        // The system calls this to perform work in a worker thread and
-        // delivers it the parameters given to AsyncTask.execute()
-        protected String doInBackground(String... tokens) {
-
-            try {
-
-                Log.d(TAG, "initiated messaging token request");
-                return FirebaseInstanceId.getInstance().getToken(tokens[0], "FCM");
-
-
-            } catch (IOException e) {
-
-                Log.d(TAG, "failed obtaining messaging token");
-                return "";
-            }
-
-        }
-
-        // The system calls this to perform work in the UI thread and delivers
-        // the result from doInBackground()
-
-        protected void onPostExecute(String result) {
-
-            messagingToken = result;
-            Log.d(TAG, "obtained messaging token:" + result);
-            updateUI();
-
-        }
-
-    }
-    */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +81,8 @@ public class DeviceControlActivity extends AppCompatActivity {
 
             deviceName = extras.getString("_device-name");
             deviceToken = extras.getString("_device-token");
+
+            Log.d(TAG, "Device token: " + deviceToken);
 
         } else {
 
@@ -134,23 +102,20 @@ public class DeviceControlActivity extends AppCompatActivity {
 
         });
 
-        messagingToken="AAAAmNxP3tQ:APA91bG5JWyRvnB4Qeri3SaCkormjgzGBbvkSsI_qYv3OuN0U1_IjjJs8miR_5XPUZZUW2-9tg_CLkrWFOo9btjhzLiQG5ApK5kqcHoxqBibi_-WD5f0eNhDtFCr1Wi_o6YQ4c2S_oBGPpr35e-rio_mbyDMntOtGw";
-        //new GetMessagingToken().execute(FirebaseInstanceId.getInstance().getId());
-
-        progressBar = (ProgressBar) findViewById(R.id.PBR___MAINACTIVITY___PROGRESSBAR);
+        progressBar = (ProgressBar) findViewById(R.id.PBR___DEVICECONTROLACTIVITY___PROGRESSBAR);
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
 
-        firebaseDatabaseReference= FirebaseDatabase.getInstance().getReference();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        takenPicturesRecyclerView = (RecyclerView) findViewById(R.id.RVW___MAINACTIVITY___ONLINEDEVICES);
+        takenPicturesRecyclerView = (RecyclerView) findViewById(R.id.RVW___DEVICECONTROLACTIVITY___TAKENPICTURES);
+        firebaseDatabaseReference= FirebaseDatabase.getInstance().getReference();
 
         firebaseAdapter = new FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder>(
                 PictureTakenMessage.class,
                 R.layout.taken_picture,
                 TakenPicturesHolder.class,
-                firebaseDatabaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(TAKEN_PICTURES_CHILD)) {
-
+                firebaseDatabaseReference.child(firebaseUser.getUid()).child(TAKEN_PICTURES_CHILD)) {
 
             @Override
             protected void populateViewHolder(TakenPicturesHolder viewHolder, final PictureTakenMessage pictureTakenMessage, int position) {
@@ -228,21 +193,8 @@ public class DeviceControlActivity extends AppCompatActivity {
             protected String doInBackground(String... params) {
                 try {
 
-                    JSONObject root = new JSONObject();
-                    JSONObject notification = new JSONObject();
-                    notification.put("body", message);
-
-                    JSONObject data = new JSONObject();
-
-                    root.put("notification", notification);
-                    data.put("message", message);
-
-                    root.put("data", data);
-                    root.put("to", recipient);
-
-                    String result = postToFCM(root.toString());
-                    Log.d(TAG, "Result: " + result);
-                    return result;
+                    String result = getResponseFromMessagingServer(
+                            "http://lorenzofailla.esy.es/Guardiano/Messaging/sendmessage.php?Action=M&t=title&m="+message+"&r="+recipient+"");
 
                 } catch (Exception ex) {
 
@@ -260,6 +212,9 @@ public class DeviceControlActivity extends AppCompatActivity {
                     int success, failure;
                     success = resultJson.getInt("success");
                     failure = resultJson.getInt("failure");
+
+                    Log.d(TAG, "got response from messaging server: " + success + " success, " + failure + "failure");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -267,14 +222,10 @@ public class DeviceControlActivity extends AppCompatActivity {
         }.execute();
     }
 
-    String postToFCM(String bodyString) throws IOException {
-
-        RequestBody body = RequestBody.create(JSON, bodyString);
+    String getResponseFromMessagingServer(String requestUrl) throws IOException {
 
         Request request = new Request.Builder()
-                .url(FCM_MESSAGE_URL)
-                .post(body)
-                .addHeader("Authorization", "key=" + messagingToken)
+                .url(requestUrl)
                 .build();
 
         Response response = okHttpClient.newCall(request).execute();
