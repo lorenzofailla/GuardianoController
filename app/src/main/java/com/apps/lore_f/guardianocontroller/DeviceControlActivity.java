@@ -127,7 +127,9 @@ public class DeviceControlActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        return;
+                        Intent intent = new Intent(getApplicationContext(), PictureViewerActivity.class);
+                        intent.putExtra("_picture-url", pictureTakenMessage.getPictureURL());
+                        startActivity(intent);
 
                     }
 
@@ -193,28 +195,37 @@ public class DeviceControlActivity extends AppCompatActivity {
             protected String doInBackground(String... params) {
                 try {
 
-                    String result = getResponseFromMessagingServer(
+                    return getResponseFromMessagingServer(
                             "http://lorenzofailla.esy.es/Guardiano/Messaging/sendmessage.php?Action=M&t=title&m="+message+"&r="+recipient+"");
 
-                } catch (Exception ex) {
+                    // TODO: 29/01/2017 implementare, sia lato server che lato client, il time to live del messaggio 
+                    
+                } catch (Exception e) {
 
-                    ex.printStackTrace();
+                    e.printStackTrace();
+                    return null;
 
                 }
 
-                return null;
             }
 
             @Override
             protected void onPostExecute(String result) {
                 try {
-                    JSONObject resultJson = new JSONObject(result);
-                    int success, failure;
-                    success = resultJson.getInt("success");
-                    failure = resultJson.getInt("failure");
 
-                    Log.d(TAG, "got response from messaging server: " + success + " success, " + failure + "failure");
+                    if(result!=null) {
+                        JSONObject resultJson = new JSONObject(result);
+                        int success, failure;
+                        success = resultJson.getInt("success");
+                        failure = resultJson.getInt("failure");
 
+                        Log.d(TAG, "got response from messaging server: " + success + " success, " + failure + " failure");
+
+                    } else {
+
+                        Log.d(TAG, "got NULL response from messaging server");
+
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
