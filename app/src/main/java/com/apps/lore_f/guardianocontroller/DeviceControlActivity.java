@@ -122,10 +122,6 @@ public class DeviceControlActivity extends AppCompatActivity {
         listOfMedia.addListenerForSingleValueEvent(listOfMediaIsReady);
         // l'esecuzione si sposta sul listener listOfMediaIsReady
 
-
-
-
-
     }
 
     private void updateUI(){
@@ -178,6 +174,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                 try {
 
                     if(result!=null) {
+
                         JSONObject resultJson = new JSONObject(result);
                         int success, failure;
                         success = resultJson.getInt("success");
