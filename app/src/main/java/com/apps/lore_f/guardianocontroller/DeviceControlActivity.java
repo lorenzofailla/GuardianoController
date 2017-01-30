@@ -18,8 +18,12 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
@@ -54,7 +58,10 @@ public class DeviceControlActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
 
     private FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder> firebaseAdapter;
+
     private static final String TAKEN_PICTURES_CHILD = "pictures_taken";
+
+    private String[] mediaIDs;
 
     public static class TakenPicturesHolder extends RecyclerView.ViewHolder {
 
@@ -111,56 +118,13 @@ public class DeviceControlActivity extends AppCompatActivity {
         takenPicturesRecyclerView = (RecyclerView) findViewById(R.id.RVW___DEVICECONTROLACTIVITY___TAKENPICTURES);
         firebaseDatabaseReference= FirebaseDatabase.getInstance().getReference();
 
-        firebaseAdapter = new FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder>(
-                PictureTakenMessage.class,
-                R.layout.taken_picture,
-                TakenPicturesHolder.class,
-                firebaseDatabaseReference.child(firebaseUser.getUid()).child(TAKEN_PICTURES_CHILD)) {
-
-            @Override
-            protected void populateViewHolder(TakenPicturesHolder viewHolder, final PictureTakenMessage pictureTakenMessage, int position) {
-
-                progressBar.setVisibility(ProgressBar.INVISIBLE);
-
-                viewHolder.txvPictureDate.setText(pictureTakenMessage.getDateStamp());
-                viewHolder.btnGoToPicture.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent intent = new Intent(getApplicationContext(), PictureViewerActivity.class);
-                        intent.putExtra("_picture-url", pictureTakenMessage.getPictureURL());
-                        startActivity(intent);
-
-                    }
-
-                });
+        DatabaseReference listOfMedia = firebaseDatabaseReference.child(firebaseUser.getUid()).child(getString(R.string.GLOBAL___UPLOADED_MEDIA));
+        listOfMedia.addListenerForSingleValueEvent(listOfMediaIsReady);
+        // l'esecuzione si sposta sul listener listOfMediaIsReady
 
 
-            }
 
-        };
 
-        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                int onlineDevicesCount = firebaseAdapter.getItemCount();
-                int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
-                // to the bottom of the list to show the newly added message.
-                if (lastVisiblePosition == -1 ||
-                        (positionStart >= (onlineDevicesCount - 1) && lastVisiblePosition == (positionStart - 1))) {
-                    takenPicturesRecyclerView.scrollToPosition(positionStart);
-                }
-
-            }
-
-        });
-
-        takenPicturesRecyclerView.setLayoutManager(linearLayoutManager);
-        takenPicturesRecyclerView.setAdapter(firebaseAdapter);
-
-        updateUI();
 
     }
 
@@ -242,6 +206,84 @@ public class DeviceControlActivity extends AppCompatActivity {
         Response response = okHttpClient.newCall(request).execute();
 
         return response.body().string();
+
+    }
+
+    ValueEventListener listOfMediaIsReady = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+            mediaIDs = new String[(int) dataSnapshot.getChildrenCount()];
+            int arrayIndex = 0;
+
+            for (DataSnapshot child : dataSnapshot.getChildren()) {
+
+                mediaIDs[arrayIndex] = child.getKey();
+                arrayIndex++;
+
+            }
+
+            initializeAdapter();
+            updateUI();
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
+    void initializeAdapter(){
+
+
+        firebaseAdapter = new FirebaseRecyclerAdapter<PictureTakenMessage, TakenPicturesHolder>(
+                PictureTakenMessage.class,
+                R.layout.taken_picture,
+                TakenPicturesHolder.class,
+                firebaseDatabaseReference.child(firebaseUser.getUid()).child(TAKEN_PICTURES_CHILD)) {
+
+            @Override
+            protected void populateViewHolder(TakenPicturesHolder viewHolder, final PictureTakenMessage pictureTakenMessage, final int position) {
+
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
+
+                viewHolder.txvPictureDate.setText(pictureTakenMessage.getDateStamp());
+                viewHolder.btnGoToPicture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(getApplicationContext(), PictureViewerActivity.class);
+                        intent.putExtra("_media-id", mediaIDs[position]);
+                        startActivity(intent);
+
+                    }
+
+                });
+
+            }
+
+        };
+
+        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int onlineDevicesCount = firebaseAdapter.getItemCount();
+                int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
+                // to the bottom of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (onlineDevicesCount - 1) && lastVisiblePosition == (positionStart - 1))) {
+                    takenPicturesRecyclerView.scrollToPosition(positionStart);
+                }
+
+            }
+
+        });
+
+        takenPicturesRecyclerView.setLayoutManager(linearLayoutManager);
+        takenPicturesRecyclerView.setAdapter(firebaseAdapter);
 
     }
 

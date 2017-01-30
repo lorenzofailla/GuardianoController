@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">GuardianoController</string>
 
+    <!-- Global use -->
+    <string name="GLOBAL___UPLOADED_MEDIA" translatable="false">pictures_taken</string>
+
     <!-- MainActivity -->
     <string name="MainActivity_onlineDevices">Online devices:</string>
 
