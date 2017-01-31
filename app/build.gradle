@@ -44,6 +44,9 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
     compile 'com.google.firebase:firebase-appindexing:10.0.0'
 
+    // Firebase storage
+    compile 'com.google.firebase:firebase-storage:10.0.0'
+
     // OkHttp
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
 }

@@ -13,11 +13,10 @@
     tools:context="com.apps.lore_f.guardianocontroller.PictureViewerActivity">
 
 
-    <SurfaceView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/SFV___PICTUREVIEWERACTIVITY___PICTUREVIEWER"
-        android:visibility="gone" />
+        android:id="@+id/IVW___PICTUREVIEWERACTIVITY___PICTUREVIEWER"/>
 
     <LinearLayout
         android:orientation="horizontal"

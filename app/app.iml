@@ -122,6 +122,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-database/10.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/10.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/10.0.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-storage-common/10.0.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-storage/10.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
@@ -158,9 +160,11 @@
     <orderEntry type="library" exported="" name="support-fragment-25.1.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-common-10.0.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-appindexing-10.0.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-storage-common-10.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.1.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-database-connection-10.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-auth-10.0.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-storage-10.0.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-ui-database-0.4.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-iid-10.0.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
@@ -188,6 +192,5 @@
     <orderEntry type="library" exported="" name="support-vector-drawable-25.1.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.1.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="android-android-25" level="project" />
   </component>
 </module>

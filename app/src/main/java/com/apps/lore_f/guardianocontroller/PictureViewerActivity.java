@@ -1,13 +1,23 @@
 package com.apps.lore_f.guardianocontroller;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.media.Image;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,6 +116,7 @@ public class PictureViewerActivity extends AppCompatActivity {
             );
 
             deleteMediaImageButton.setEnabled(true);
+            loadPicture();
 
         }
 
@@ -116,8 +129,24 @@ public class PictureViewerActivity extends AppCompatActivity {
 
     void loadPicture(){
 
-        //Toast.makeText(this, currentMedia.getPictureURL(), Toast.LENGTH_SHORT).show();
+        StorageReference httpsReference = FirebaseStorage.getInstance().getReferenceFromUrl(currentMedia.getPictureURL());
 
+        final long MAX_SIZE = 5*1024 * 1024;
+        httpsReference.getBytes(MAX_SIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                ImageView imageView = (ImageView) findViewById(R.id.IVW___PICTUREVIEWERACTIVITY___PICTUREVIEWER);
+                imageView.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
     }
 
 }
