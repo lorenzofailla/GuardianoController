@@ -1,5 +1,6 @@
 package com.apps.lore_f.guardianocontroller;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private GoogleApiClient googleApiClient;
 
     private static final String ONLINE_DEVICES_CHILD="online_devices";
+    
+    private ProgressDialog waitForDeviceHeartBeat;
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         }
 
+        
         // inizializza il FirebaseAuth
         firebaseAuth= FirebaseAuth.getInstance();
 
@@ -136,12 +140,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     @Override
                     public void onClick(View view) {
 
+                        /*
                         Intent intent = new Intent(getApplicationContext(), DeviceControlActivity.class);
                         intent.putExtra("_device-name", onlineDeviceMessage.getDeviceDescription());
                         intent.putExtra("_device-token", onlineDeviceMessage.getDeviceToken());
 
                         startActivity(intent);
                         return;
+                        */
+
+                        waitForDeviceHeartBeat = ProgressDialog.show (MainActivity.this, "Titolo", "messaggio",false, true);
 
                     }
 
@@ -200,6 +208,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
 
     }
+    
+    @Override
+    public void onPause(){
+        
+                super.onPause();
 
+        // TODO: 03/feb/2017 fermare il broadcastreceiver 
+    }
+
+    @Override
+    public void onResume(){
+
+        super.onResume();
+
+        // TODO: 03/feb/2017 implementare broadcastreceiver e registrare i filtri per gli intent da ricevere
+
+    }
 
 }

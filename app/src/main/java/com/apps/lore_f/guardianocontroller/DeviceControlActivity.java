@@ -1,6 +1,7 @@
 package com.apps.lore_f.guardianocontroller;
 
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private static final String TAKEN_PICTURES_CHILD = "pictures_taken";
 
     private String[] mediaIDs;
+
 
     public static class TakenPicturesHolder extends RecyclerView.ViewHolder {
 
