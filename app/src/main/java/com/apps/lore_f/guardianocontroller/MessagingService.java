@@ -35,7 +35,7 @@ public class MessagingService extends FirebaseMessagingService {
         Map<String, String> messageData;
         String messageTitle;
         String messageCommand="";
-        String messageSender=remoteMessage.getFrom();
+        String messageSender;
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
@@ -43,42 +43,29 @@ public class MessagingService extends FirebaseMessagingService {
             /*
             recupera i dati contenuti nel corpo del messaggio
             * */
+
             messageData = remoteMessage.getData();
-            messageTitle=messageData.get("title");
-            messageCommand=messageData.get("message");
 
-        }
+            messageTitle = messageData.get("title");
+            messageCommand = messageData.get("message");
+            messageSender = messageData.get("reply-to");
 
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+            Log.d(TAG, "received message: " + messageData);
 
-        /*
-        // inizializzo il BroadcastManager
-        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
-        Intent intent = new Intent("CAMERACONTROL___REMOTE_COMMAND_RECEIVED")
-                .putExtra("REMOTE_COMMAND_MESSAGE", remoteMessage.getNotification().getBody());
+            switch (messageCommand) {
 
-        broadcastManager.sendBroadcast(intent);
-        */
+                case "RESPONSE_FROM_SERVER:::YES_I_AM_ALIVE":
 
-        /*
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-        }
-        */
-
-        switch(messageCommand){
-
-            case "RESPONSE_FROM_SERVER:::YES_I_AM_ALIVE":
-
-                // inizializzo il BroadcastManager
-                LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
+                    // inizializzo il BroadcastManager
+                    LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(this);
                     Intent intent = new Intent("GUARDIANOCONTROLLER___HEARTBEAT_RECEIVED")
-                .putExtra("_sender-token", remoteMessage.getFrom());
+                            .putExtra("_sender-token", messageSender);
 
-                broadcastManager.sendBroadcast(intent);
+                    broadcastManager.sendBroadcast(intent);
 
-            break;
+                    break;
+
+            }
 
         }
 
@@ -86,7 +73,6 @@ public class MessagingService extends FirebaseMessagingService {
         // message, here is where that should be initiated. See sendNotification method below.
 
     }
-    // [END receive_message]
 
     /**
      * Create and show a simple notification containing the received FCM message.

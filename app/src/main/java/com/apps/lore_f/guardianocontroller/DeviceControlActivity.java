@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.appindexing.builders.MessageBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,7 +47,6 @@ public class DeviceControlActivity extends AppCompatActivity {
     private static final String TAG = "->DeviceControlActivity";
     private String deviceName;
     private String deviceToken;
-    OkHttpClient okHttpClient = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final String FCM_MESSAGE_URL = "http://lorenzofailla.esy.es/Guardiano/Messaging/";
 
@@ -144,67 +144,10 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     private void requestShot(){
 
-        sendMessage(deviceToken, "COMMAND_FROM_CLIENT:::TAKE_PICTURE");
+        Messaging.sendMessage(deviceToken, "COMMAND_FROM_CLIENT:::TAKE_PICTURE",FirebaseInstanceId.getInstance().getToken());
 
     }
 
-    public void sendMessage(final String recipient, final String message) {
-
-        new AsyncTask<String, String, String>() {
-            @Override
-            protected String doInBackground(String... params) {
-                try {
-
-                    return getResponseFromMessagingServer(
-                            "http://lorenzofailla.esy.es/Guardiano/Messaging/sendmessage.php?Action=M&t=title&m="+message+"&r="+recipient+"");
-
-                    // TODO: 29/01/2017 implementare, sia lato server che lato client, il time to live del messaggio 
-                    
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-                    return null;
-
-                }
-
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                try {
-
-                    if(result!=null) {
-
-                        JSONObject resultJson = new JSONObject(result);
-                        int success, failure;
-                        success = resultJson.getInt("success");
-                        failure = resultJson.getInt("failure");
-
-                        Log.d(TAG, "got response from messaging server: " + success + " success, " + failure + " failure");
-
-                    } else {
-
-                        Log.d(TAG, "got NULL response from messaging server");
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.execute();
-    }
-
-    String getResponseFromMessagingServer(String requestUrl) throws IOException {
-
-        Request request = new Request.Builder()
-                .url(requestUrl)
-                .build();
-
-        Response response = okHttpClient.newCall(request).execute();
-
-        return response.body().string();
-
-    }
 
     ValueEventListener updateKeysArray = new ValueEventListener() {
         @Override

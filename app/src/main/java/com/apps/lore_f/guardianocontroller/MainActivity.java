@@ -1,12 +1,19 @@
 package com.apps.lore_f.guardianocontroller;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,8 +32,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
@@ -49,10 +59,116 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private ProgressBar progressBar;
     private LinearLayoutManager linearLayoutManager;
     private GoogleApiClient googleApiClient;
-
+    private String deviceTokenToConnect;
+    private String deviceNameToConnect;
+    private int timeOutForDeviceHeartBeat = 10;
+    private int timeElapsedForDeviceHeartBeat;
+    private LocalBroadcastManager localBroadcastManager;
     private static final String ONLINE_DEVICES_CHILD="online_devices";
-    
+    private static final String TAG="->MainActivity";
     private ProgressDialog waitForDeviceHeartBeat;
+
+    private Handler tasksHandler = new Handler();
+
+    private Runnable tickTimeoutForDeviceHeartBeat = new Runnable() {
+        @Override
+        public void run() {
+
+            /* controlla il raggiungimento del timeout
+            * se non si è ancora raggiunto il timeout, incrementa il contatore del tempo trascorso e
+            * passa il valore alla ProgressDialog
+            * il Runnable viene rilanciato con ritardo di 1 secondo
+            *
+            * altrimenti: elimina la registrazione del dispositivo remoto dal database
+            * */
+
+            if (timeElapsedForDeviceHeartBeat++<timeOutForDeviceHeartBeat){
+
+                waitForDeviceHeartBeat.setProgress(timeElapsedForDeviceHeartBeat);
+                tasksHandler.postAtTime(this, SystemClock.uptimeMillis() + 1000);
+
+            } else {
+
+                waitForDeviceHeartBeat.dismiss();
+                /*
+                Query selectedDevice=firebaseDatabaseReference
+                        .orderByChild("deviceDescription")
+                        .equalTo(deviceNameToConnect);
+
+                selectedDevice.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        dataSnapshot.getRef().removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                                waitForDeviceHeartBeat.dismiss();
+
+                            }
+
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+                });
+                */
+
+            }
+
+        }
+
+    };
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            switch (intent.getAction()){
+
+                case "GUARDIANOCONTROLLER___HEARTBEAT_RECEIVED":
+
+                    Log.d(TAG, "remote device heartbeat received");
+
+                    if(intent.hasExtra("_sender-token")){
+
+                        String senderToken = intent.getStringExtra("_sender-token");
+
+                        if (senderToken.equals(deviceTokenToConnect)) {
+
+                            /* il dispositivo a cui si era chiesto di connettersi ha risposto con un heartbeat */
+
+                            // rimuove eventuali tasks in sospeso
+                            tasksHandler.removeCallbacks(tickTimeoutForDeviceHeartBeat);
+
+                            // chiude la ProgressDialog
+                            waitForDeviceHeartBeat.dismiss();
+
+                            // avvia DeviceControlActivity
+                            Intent startActivityIntent = new Intent(getApplicationContext(), DeviceControlActivity.class)
+                                    .putExtra("_device-name", deviceNameToConnect)
+                                    .putExtra("_device-token", deviceTokenToConnect);
+
+                            startActivity(startActivityIntent);
+                            return;
+
+                        }
+
+
+                    }
+                    break;
+
+            }
+
+        }
+        
+    };
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -123,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         onlineDevicesRecyclerView = (RecyclerView) findViewById(R.id.RVW___MAINACTIVITY___ONLINEDEVICES);
 
         firebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
         firebaseAdapter = new FirebaseRecyclerAdapter<OnlineDeviceMessage, OnlineDevicesHolder>(
                 OnlineDeviceMessage.class,
                 R.layout.online_device,
@@ -140,16 +257,26 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     @Override
                     public void onClick(View view) {
 
-                        /*
-                        Intent intent = new Intent(getApplicationContext(), DeviceControlActivity.class);
-                        intent.putExtra("_device-name", onlineDeviceMessage.getDeviceDescription());
-                        intent.putExtra("_device-token", onlineDeviceMessage.getDeviceToken());
+                        deviceTokenToConnect=onlineDeviceMessage.getDeviceToken();
+                        deviceNameToConnect=onlineDeviceMessage.getDeviceDescription();
 
-                        startActivity(intent);
-                        return;
-                        */
+                        Messaging.sendMessage(deviceTokenToConnect, "COMMAND_FROM_CLIENT:::ARE_YOU_ALIVE",FirebaseInstanceId.getInstance().getToken());
 
-                        waitForDeviceHeartBeat = ProgressDialog.show (MainActivity.this, "Titolo", "messaggio",false, true);
+                        timeElapsedForDeviceHeartBeat=0;
+
+                        waitForDeviceHeartBeat = new ProgressDialog(MainActivity.this);
+
+                        waitForDeviceHeartBeat.setTitle(getString(R.string.MainActivity_waitForRemoteDeviceTitle));
+                        waitForDeviceHeartBeat.setMessage(getString(R.string.MainActivity_waitForRemoteDevice));
+                        waitForDeviceHeartBeat.setIndeterminate(false);
+                        waitForDeviceHeartBeat.setCancelable(false);
+                        waitForDeviceHeartBeat.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        waitForDeviceHeartBeat.setMax(10);
+                        waitForDeviceHeartBeat.setProgress(timeElapsedForDeviceHeartBeat);
+
+                        waitForDeviceHeartBeat.show();
+
+                        tasksHandler.postAtTime(tickTimeoutForDeviceHeartBeat,1000);
 
                     }
 
@@ -212,9 +339,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onPause(){
         
-                super.onPause();
+        super.onPause();
 
-        // TODO: 03/feb/2017 fermare il broadcastreceiver 
+        /* registra il ricevitore di broadcast con il filtro creato */
+        try {
+
+            unregisterReceiver(broadcastReceiver);
+
+        }catch (IllegalArgumentException e) {
+
+
+        }
+
     }
 
     @Override
@@ -222,7 +358,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         super.onResume();
 
-        // TODO: 03/feb/2017 implementare broadcastreceiver e registrare i filtri per gli intent da ricevere
+        /* inizializza e popola il filtro degli intent */
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("GUARDIANOCONTROLLER___HEARTBEAT_RECEIVED");
+
+        /* registra il ricevitore di broadcast con il filtro creato */
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.registerReceiver(broadcastReceiver, intentFilter);
 
     }
 

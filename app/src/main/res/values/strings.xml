@@ -6,6 +6,8 @@
 
     <!-- MainActivity -->
     <string name="MainActivity_onlineDevices">Online devices:</string>
+    <string name="MainActivity_waitForRemoteDevice">Waiting for the selected remote device to connect...</string>
+    <string name="MainActivity_waitForRemoteDeviceTitle">One moment</string>
 
     <!-- MainActivity_Menu -->
     <string name="MainActivity_Menu_signOut">Sign out</string>
@@ -22,4 +24,14 @@
 
     <!-- DeviceControlActivity -->
     <string name="DeviceControlActivity_requestShotLabel">Request instant shot</string>
+
+    <!-- PictureViewerActivity -->
+    <string name="PictureViewerActivity_removingFromDatabase">Removing entry from database</string>
+    <string name="PictureViewerActivity_removingFromCloudStorage">Removing file from cloud storage</string>
+    <string name="PictureViewerActivity_removingFromLocalStorage">Removing file from local storage</string>
+    <string name="PictureViewerActivity_waitForElementDeletionTitle">One moment</string>
+
+    <string name="PictureViewerActivity_downloadingResourceFromCloud">Downloading resource from cloud storage</string>
+    <string name="PictureViewerActivity_downloadingResourceFromCloudTitle">One moment</string>
+
 </resources>
