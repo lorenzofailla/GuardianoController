@@ -63,7 +63,7 @@ public class PictureViewerActivity extends AppCompatActivity {
     private ImageView pictureViewer;
 
     private File mediaStorageDir;
-    private float scaleFactor;
+    private float scaleFactor =1.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

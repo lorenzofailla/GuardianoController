@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private GoogleApiClient googleApiClient;
     private String deviceTokenToConnect;
     private String deviceNameToConnect;
-    private int timeOutForDeviceHeartBeat = 10;
+    private int timeOutForDeviceHeartBeat = 30;
     private int timeElapsedForDeviceHeartBeat;
     private LocalBroadcastManager localBroadcastManager;
     private static final String ONLINE_DEVICES_CHILD="online_devices";
@@ -226,6 +226,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             return;
 
         }
+
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+        firebaseMessaging.subscribeToTopic("notifications");
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
